@@ -81,3 +81,4 @@ We've discovered an internal company portal that might be leaking sensitive info
 
 ## Recreating the Challenge
 To deploy this challenge, simply follow the setup steps above, ensuring that the server is accessible to CTF participants. Using Docker simplifies the process, making it easily replicable on any system.
+But if you prefer to download source code and run it manually, then you can use this repository: https://github.com/AndrewVozniak/ctf_howest.git
