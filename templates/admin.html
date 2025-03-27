@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function showTab(tab) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tabContent => tabContent.classList.add('hidden'));
+
+            document.getElementById(tab).classList.remove('hidden');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('bg-gray-800', 'text-white'));
+            document.getElementById(tab + '-btn').classList.add('bg-gray-800', 'text-white');
+        }
+
+        function loadFiles() {
+            fetch('/files')
+                .then(response => response.json())
+                .then(files => {
+                    const fileList = document.getElementById('file-list');
+                    fileList.innerHTML = '';
+
+                    files.forEach(file => {
+                        const listItem = document.createElement('li');
+                        listItem.classList.add('flex', 'justify-between', 'items-center');
+
+                        const fileName = document.createElement('span');
+                        fileName.textContent = file;
+
+                        const downloadButton = document.createElement('button');
+                        downloadButton.classList.add('bg-green-600', 'text-white', 'py-1', 'px-4', 'rounded', 'hover:bg-green-500');
+                        downloadButton.textContent = 'Download';
+                        downloadButton.onclick = () => {
+                            window.location.href = `/download/${file}`;
+                        };
+
+                        listItem.appendChild(fileName);
+                        listItem.appendChild(downloadButton);
+                        fileList.appendChild(listItem);
+                    });
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFiles();
+        });
+    </script>
+</head>
+
+<body class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Admin Panel</h1>
+
+        <!-- 🏴‍☠️ Old system, old habits... 5 tiny keys [a-z0-9] -->
+
+        <div class="flex space-x-4 mb-6 border-b-2 border-gray-600">
+            <button id="users-btn" class="tab-button py-2 px-4 text-lg font-medium hover:bg-gray-700 focus:outline-none" onclick="showTab('users')">
+                Users
+            </button>
+            <button id="files-btn" class="tab-button py-2 px-4 text-lg font-medium hover:bg-gray-700 focus:outline-none" onclick="showTab('files')">
+                Internal Files
+            </button>
+            <button id="files-btn" class="tab-button py-2 px-4 text-lg font-medium hover:bg-gray-700 focus:outline-none" onclick="window.location.href = '/logout'">
+                Log Out
+            </button>
+        </div>
+
+        <div id="users" class="tab-content hidden">
+            <h2 class="text-2xl font-semibold mb-4">Users</h2>
+            <p class="text-gray-400">Maybe key is hidden here? But budget cuts removed all admin buttons...</p>
+            <table class="table-auto w-full mt-4 text-gray-300">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">ID</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td class="px-4 py-2">{{ user.id }}</td>
+                            <td class="px-4 py-2">{{ user.name }}</td>
+                            <td class="px-4 py-2">{{ user.email}}</td>
+                            <td class="px-4 py-2">
+                                <button class="bg-gray-600 text-white py-1 px-4 rounded opacity-50 "
+                                        disabled
+                                        title="Budget cuts removed admin controls. Try another way...">
+                                    (no access)
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="files" class="tab-content hidden">
+            <h2 class="text-2xl font-semibold mb-4">Internal Files</h2>
+            <p class="text-gray-400">Here you can manage internal files.</p>
+            <ul id="file-list" class="space-y-4 mt-4 text-gray-300"></ul>
+
+{#            <ul class="space-y-4 mt-4 text-gray-300">#}
+{#                <li class="flex justify-between items-center">#}
+{#                    <span>Document 1.pdf</span>#}
+{#                    <button class="bg-green-600 text-white py-1 px-4 rounded hover:bg-green-500">Download</button>#}
+{#                </li>#}
+{#                <li class="flex justify-between items-center">#}
+{#                    <span>Internal Report.docx</span>#}
+{#                    <button class="bg-green-600 text-white py-1 px-4 rounded hover:bg-green-500">Download</button>#}
+{#                </li>#}
+{#                <li class="flex justify-between items-center">#}
+{#                    <span>Project Plan.xlsx</span>#}
+{#                    <button class="bg-green-600 text-white py-1 px-4 rounded hover:bg-green-500">Download</button>#}
+{#                </li>#}
+{#            </ul>#}
+        </div>
+    </div>
+
+    <script>
+        showTab('users');
+    </script>
+</body>
+</html>

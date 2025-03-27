@@ -1,0 +1,24 @@
+20.03.2023 13:24:43 - System started. Loading configuration...
+20.03.2023 13:24:44 - Configuration loaded successfully with next settings:
+    - Server port: 5000
+    - Max users: 100
+    - Max connections: 1000
+    - Log level: INFO
+    - Log file: logs.txt
+    - Database connection: OK
+    - Database host: localhost
+    - Database user: admin
+    - Database name: ctf
+20.03.2023 13:24:44 - Database connected.
+20.03.2025 12:42:12 - Staff notification: User 'admin' has logged in.
+20.03.2025 12:42:12 - File system notification: 'static/credentials.txt' has been created.
+20.03.2025 12:45:01 - Staff notification: User 'admin' has logged out.
+21.03.2025 12:45:01 - Staff notification: User 'admin' has logged in.
+21.03.2025 15:04:03 - File system error: Error while reading file 'static/logs.txt'.
+21.03.2025 15:09:25 - Staff notification: User 'admin' has logged out.
+22.03.2025 10:15:01 - Internal error: Database connection failed.
+22.03.2025 10:15:05 - Staff notification: User 'admin' has logged in.
+22.03.2025 10:15:08 - Message to all staff: Internal error occurred, please check the logs for details.
+23.03.2025 10:15:01 - Staff notification: User 'admin' has logged out.
+23.03.2025 10:15:08 - Staff notification: User 'admin' has logged in.
+23.03.2025 10:15:08 - Message to all staff: Internal error occurred, please check the logs for details.
